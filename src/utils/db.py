@@ -3,6 +3,10 @@ import os
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Get database URL from environment variables
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
