@@ -10,6 +10,7 @@ dependencies = [
     "requests>=2.32.3",
     "psycopg2-binary>=2.9.10",
     "pandas>=2.2.3",
+    "python-dotenv>=1.0.1",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
@@ -30,3 +31,4 @@ packages = ["src/ddvc"]
 
 [tool.rye.scripts]
 harmonic = "python -m src.collect.harmonic"
+predictleads = "python -m src.collect.predictleads"
