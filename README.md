@@ -12,7 +12,9 @@
 brew install llvm
 ```
 
-### Rye
+### Python/Rye
+
+You can use rye to automatically manage your Python environment otherwise you require Python 3.12.x
 
 ```bash
 brew install rye
@@ -22,13 +24,17 @@ brew install rye
 rye sync
 ```
 
-### Bun
+### Node.js/Bump
+
+Need Node.js v20.11.1^
 
 ```bash
 brew install bun
 ```
 
-### Supabase
+### Database
+
+We're using Postgres v15.8^
 
 We're using [Supabase](https://supabase.com) as our database, you'll need to create a project and get the database URL.
 
@@ -46,6 +52,7 @@ See [docs/schema.md](docs/schema.md)
 ## Data collection
 
 Add a `.env` file in the root of the project based on `.env.example`
+and a `front/.env` in the `front` directory based on `front/.env.example`
 
 Run the following commands to collect data:
 
