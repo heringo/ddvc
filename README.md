@@ -59,6 +59,8 @@ rye run similarweb
 
 ## NLP pipeline
 
+See [docs/nlp_pipeline.md](docs/nlp_pipeline.md)
+
 ```bash
 rye run nlp_pipeline
 ```
