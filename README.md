@@ -1,8 +1,19 @@
-# DDV Market Trend
+# ![](./icon.png) Pulse
 
 ![alt text](https://i.imgur.com/O8vZHPM.png)
 
 > This project was built as part of the Data-Driven VC Hackathon organized by [Red River West](https://redriverwest.com) & [Bivwak! by BNP Paribas](https://bivwak.bnpparibas/)
+
+## General idea
+
+This project aims to tackle the lack of granularity and static nature of current market segmentations done by most data providers or VCs.
+
+We propose a dynamic data-driven approach to segment companies and identify markets without the need for manual intervention. This approach is based on the analysis of enriched textual data from companies retrieved from different sources including (Website, Github, PredictLads, ...) and the use of NLP techniques (embedding clustering) to classify them into different topics.
+
+We then give a brief overview of those markets by aggregating the data from multiple companies and reprensenting the market trends as a whole.
+
+Here is a brief overview of the workflow
+![](./workflow.png)
 
 ## Prerequisites (assuming Mac environment, with Homebrew installed)
 
