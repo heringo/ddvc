@@ -35,7 +35,7 @@ brew install rye
 rye sync
 ```
 
-### Node.js/Bump
+### Node.js/Bun
 
 Need Node.js v20.11.1^
 
