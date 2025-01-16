@@ -83,7 +83,9 @@ const props = defineProps<{
   data: any;
 }>();
 
-const data = props.data as any;
+const data = props.data.sort(
+  (a: any, b: any) => b.topic_probability - a.topic_probability
+);
 
 const columns: ColumnDef<Payment>[] = [
   {
@@ -102,12 +104,17 @@ const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) =>
       h(
         "a",
-        { href: `https://${row.getValue("domain")}`, target: "_blank" },
+        {
+          href: `https://${row.getValue("domain")}`,
+          target: "_blank",
+          class: "underline",
+        },
         (row as any)?.original?.name
       ),
   },
   {
     accessorKey: "topic_probability",
+    enableMultiSort: true,
     header: ({ column }) => {
       return h(
         Button,
@@ -124,7 +131,7 @@ const columns: ColumnDef<Payment>[] = [
                 ? "lucide:arrow-up"
                 : column.getIsSorted() === "desc"
                 ? "lucide:arrow-down"
-                : "lucide:text",
+                : "lucide:arrow-up-down",
           }),
         ]
       );
@@ -155,6 +162,7 @@ const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "founded_at",
+    enableMultiSort: true,
     header: ({ column }) => {
       return h(
         Button,
@@ -171,7 +179,7 @@ const columns: ColumnDef<Payment>[] = [
                 ? "lucide:arrow-up"
                 : column.getIsSorted() === "desc"
                 ? "lucide:arrow-down"
-                : "lucide:text",
+                : "lucide:arrow-up-down",
           }),
         ]
       );
@@ -185,6 +193,7 @@ const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "headcount",
+    enableMultiSort: true,
     header: ({ column }) => {
       return h(
         Button,
@@ -201,7 +210,7 @@ const columns: ColumnDef<Payment>[] = [
                 ? "lucide:arrow-up"
                 : column.getIsSorted() === "desc"
                 ? "lucide:arrow-down"
-                : "lucide:text",
+                : "lucide:arrow-up-down",
           }),
         ]
       );
@@ -211,6 +220,7 @@ const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "funding_total",
+    enableMultiSort: true,
     header: ({ column }) => {
       return h(
         Button,
@@ -227,7 +237,7 @@ const columns: ColumnDef<Payment>[] = [
                 ? "lucide:arrow-up"
                 : column.getIsSorted() === "desc"
                 ? "lucide:arrow-down"
-                : "lucide:text",
+                : "lucide:arrow-up-down",
           }),
         ]
       );

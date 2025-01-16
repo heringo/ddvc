@@ -4,10 +4,10 @@ import {
   VisStackedBar,
   VisAxis,
   VisBulletLegend,
-  VisTooltip
-} from '@unovis/vue';
+  VisTooltip,
+} from "@unovis/vue";
 
-import { FitMode, Direction, Orientation, StackedBar } from '@unovis/ts';
+import { FitMode, Direction, Orientation, StackedBar } from "@unovis/ts";
 
 const props = defineProps<{
   height: number;
@@ -27,20 +27,21 @@ const legendRef = ref<HTMLElement | null>(null);
 
 watch(height, async () => {
   await nextTick();
-  console.log('height changed');
+  console.log("height changed");
   internalHeight.value = height.value - legendRef?.value?.clientHeight || 0;
 });
 
 onMounted(async () => {
   await nextTick();
 
-  console.log('legend', getComputedStyle(legendRef.value));
+  console.log("legend", getComputedStyle(legendRef.value));
   internalHeight.value = height.value - legendRef?.value?.clientHeight || 0;
-  console.log('height', height.value);
-  console.log('legend', legendRef?.value?.clientHeight);
+  console.log("height", height.value);
+  console.log("legend", legendRef?.value?.clientHeight);
 });
 
-console.log('TICKFORMAT', props.tickFormat);
+console.log("TICKFORMAT", props.tickFormat);
+console.log("DATA", props.data);
 </script>
 
 <template>
