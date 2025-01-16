@@ -4,7 +4,7 @@
 
 > This project was built as part of the Data-Driven VC Hackathon organized by [Red River West](https://redriverwest.com) & [Bivwak! by BNP Paribas](https://bivwak.bnpparibas/)
 
-## Prerequisites
+## Prerequisites (assuming Mac environment, with Homebrew installed)
 
 ### LLVM
 
@@ -20,6 +20,12 @@ brew install rye
 
 ```bash
 rye sync
+```
+
+### Bun
+
+```bash
+brew install bun
 ```
 
 ### Supabase
@@ -53,7 +59,17 @@ rye run similarweb
 
 ## NLP pipeline
 
-See [docs/nlp_pipeline.md](docs/nlp_pipeline.md)
+```bash
+rye run nlp_pipeline
+```
+
+## Frontend
+
+```bash
+cd front
+bun install
+bun dev
+```
 
 ## Next Steps for a Comprehensive Product
 
