@@ -35,3 +35,5 @@ packages = ["src/ddvc"]
 harmonic = "python -m src.collect.harmonic"
 predictleads = "python -m src.collect.predictleads"
 predictleads_news = "python -m src.collect.predictleads_news"
+pdl_headcount_sales_eng = "python -m src.collect.pdl_headcount_sales_eng"
+nlp_pipeline = "python -m src.nlp_pipelines.classifier_pipeline"
