@@ -6,11 +6,16 @@
 
 ## Prerequisites
 
+### LLVM
+
+```bash
+brew install llvm
+```
+
 ### Rye
 
 ```bash
 brew install rye
-brew install llvm
 ```
 
 ```bash
