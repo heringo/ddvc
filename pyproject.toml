@@ -34,3 +34,4 @@ packages = ["src/ddvc"]
 [tool.rye.scripts]
 harmonic = "python -m src.collect.harmonic"
 predictleads = "python -m src.collect.predictleads"
+predictleads_news = "python -m src.collect.predictleads_news"
