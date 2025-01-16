@@ -1,21 +1,17 @@
-import re
-import nltk
-#from nltk.corpus import satopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
-from openai import OpenAI
-from math import sqrt  # Importing sqrt from the math module
-from bertopic import BERTopic
-import random
-from supabase import create_client
-import time
-import tiktoken
-from sqlalchemy import create_engine, MetaData, Table, select
-from sqlalchemy.orm import sessionmaker
+import re, time, tiktoken, os
+from openai                 import OpenAI
+from dotenv                 import load_dotenv
 
+load_dotenv()
+
+openai_api_key = os.getenv('OPENAI_API_KEY')
+openAI_client = OpenAI(api_key=openai_api_key,)
 
 
 class EmbeddingPipeline:
+    """
+    Class to get the embeddings from the companies
+    """
     def __init__(self):
         pass
 
@@ -53,11 +49,6 @@ class EmbeddingPipeline:
             company['description_embeddings'] = embedding
         
         return companies_list_of_dicts
-
-
-
-
-
 
 
 def get_embeddings_from_list_of_texts_with_rate_limit(
