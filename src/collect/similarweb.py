@@ -1,15 +1,14 @@
 import os
+import sys
+
 import requests
 import sqlalchemy
-import pandas as pd
-import sys
+
+from utils import db
 
 sql_library = sqlalchemy
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-import src.utils as utils
-
-db = utils.db
 
 
 # Function to fetch domain names from the `companies` table

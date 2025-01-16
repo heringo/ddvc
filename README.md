@@ -48,6 +48,7 @@ rye run harmonic
 rye run predictleads
 rye run predictleads_news
 rye run pdl_headcount_sales_eng
+rye run similarweb
 ```
 
 ## NLP pipeline
