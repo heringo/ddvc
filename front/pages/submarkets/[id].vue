@@ -37,15 +37,15 @@ companies.value = companiesData?.value?.data?.sort(
 <template>
   <div class="container min-h-screen flex flex-row py-12 justify-center">
     <div class="text-justify w-full sm:w-2/3 xl:w-1/2">
-      <h1 class="text-4xl font-bold mb-4">
-        {{ submarket?.topic_name[0].toUpperCase()
-        }}{{ submarket?.topic_name.substr(1).toLowerCase() }}
+      <NuxtLink to="/" class="flex flex-row items-center mb-2">
+        <Logo class="w-4 h-4 mr-1" />
+        <h1 class="text-xl font-bold">Pulse</h1>
+      </NuxtLink>
+      <h1 class="text-4xl text-left font-bold mb-4">
+        {{ submarket?.topic_name }}
       </h1>
       <p class="text-gray-500 mb-8">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque nostrum
-        excepturi odio sequi totam, veritatis ipsam magni! Unde veritatis,
-        doloribus voluptatibus placeat quae quos aut ducimus impedit odio velit
-        enim.
+        {{ submarket?.topic_description }}
       </p>
 
       <h3 class="text-2xl font-bold mb-4">Companies</h3>

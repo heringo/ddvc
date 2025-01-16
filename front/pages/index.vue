@@ -128,86 +128,102 @@ const getSubmarkets = async () => {
       </div>
     </div>
 
-    <div
-      class="container min-h-screen flex flex-row py-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12"
-      v-if="searched"
-    >
-      <div
-        v-for="submarket in submarkets"
-        :key="submarket.id"
-        class="p-4 flex flex-col black-shadow with-hover cursor-pointer"
-        @click="router.push(`/submarkets/${submarket.id}`)"
+    <div class="container min-h-screen flex flex-col py-12" v-if="searched">
+      <NuxtLink
+        to="/"
+        class="flex flex-row items-center justify-center"
+        @click="searched = false"
       >
-        <h3 class="text-xl font-bold">
-          {{ submarket.topic_name[0].toUpperCase()
-          }}{{ submarket.topic_name.substr(1).toLowerCase() }}
-        </h3>
-        <div class="flex flex-row w-full">
-          <div class="relative h-8 w-8 my-1">
-            <img
-              v-for="(company, index) in submarket.companies"
-              :key="company.id"
-              :src="company.logo_url"
-              class="absolute h-8 w-8 rounded-full border bg-white"
-              :style="{
-                left: `${(submarket.companies.length - index - 1) * 20}px`,
-                zIndex: 100 - index,
-              }"
-            />
-            <span
-              v-if="submarket.companies.length > 1"
-              class="absolute text-sm"
-              :style="{
-                left: `${submarket.companies.length * 20 + 20}px`,
-                zIndex: 101,
-                width: '80px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-              }"
-            >
-              +{{ submarket.company_count - submarket.companies.length }} more
-            </span>
+        <Logo class="w-6 h-6 mr-1" />
+        <h1 class="text-2xl font-bold">Pulse</h1>
+      </NuxtLink>
+      <h2 class="text-4xl font-bold text-center">Open-source</h2>
+      <p class="text-gray-500 text-center">
+        Explore all submarkets related to open-source
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 mt-8">
+        <div
+          v-for="submarket in submarkets"
+          :key="submarket.id"
+          class="p-4 flex flex-col black-shadow with-hover cursor-pointer"
+          @click="router.push(`/submarkets/${submarket.id}`)"
+        >
+          <h3 class="text-xl font-bold">
+            {{ submarket.topic_name }}
+          </h3>
+          <div class="flex flex-row w-full">
+            <div class="relative h-8 w-8 my-1">
+              <img
+                v-for="(company, index) in submarket.companies"
+                :key="company.id"
+                :src="company.logo_url"
+                class="absolute h-8 w-8 rounded-full border bg-white"
+                :style="{
+                  left: `${(submarket.companies.length - index - 1) * 20}px`,
+                  zIndex: 100 - index,
+                }"
+              />
+              <span
+                v-if="submarket.companies.length > 1"
+                class="absolute text-sm"
+                :style="{
+                  left: `${submarket.companies.length * 20 + 20}px`,
+                  zIndex: 101,
+                  width: '80px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                }"
+              >
+                +{{ submarket.company_count - submarket.companies.length }} more
+              </span>
+            </div>
           </div>
-        </div>
-        <p class="text-gray-500 mb-4">
-          TODO: Generate a 2 sentence description
-        </p>
+          <p class="text-gray-500 mb-4 mt-1">
+            {{ submarket?.topic_description }}
+          </p>
 
-        <div class="flex flex-col flex-1 justify-end">
-          <div class="flex flex-row justify-between">
-            <span
-              class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
-              >Most advanced:
-              {{
-                formatFunding(
-                  submarket.sortedFundings[submarket.sortedFundings.length - 1]
-                )
-              }}</span
-            >
-            <span
-              class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
-              >First mover:
-              {{ new Date(submarket.earliest_founded_at).getFullYear() }}</span
-            >
-          </div>
-          <div class="flex flex-row justify-between mt-2">
-            <span
-              class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
-              >Total funding ${{ formatAmount(submarket.total_funding) }}</span
-            >
-            <span
-              class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
-              >Main geography:
-              {{
-                submarket.most_common_geography == "USA"
-                  ? "🇺🇸"
-                  : submarket.most_common_geography == "Europe"
-                  ? "🇪🇺"
-                  : "🌎"
-              }}
-              {{ submarket.most_common_geography }}
-            </span>
-            <!-- company per stage -->
+          <div class="flex flex-col flex-1 justify-end">
+            <div class="flex flex-row justify-between">
+              <span
+                class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
+                >Most advanced:
+                {{
+                  formatFunding(
+                    submarket.sortedFundings[
+                      submarket.sortedFundings.length - 1
+                    ]
+                  )
+                }}</span
+              >
+              <span
+                class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
+                >First mover:
+                {{
+                  new Date(submarket.earliest_founded_at).getFullYear()
+                }}</span
+              >
+            </div>
+            <div class="flex flex-row justify-between mt-2">
+              <span
+                class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
+                >Total funding ${{
+                  formatAmount(submarket.total_funding)
+                }}</span
+              >
+              <span
+                class="px-2 py-1 rounded-xl bg-gray-100 border border-gray-300 text-sm"
+                >Main geography:
+                {{
+                  submarket.most_common_geography == "USA"
+                    ? "🇺🇸"
+                    : submarket.most_common_geography == "Europe"
+                    ? "🇪🇺"
+                    : "🌎"
+                }}
+                {{ submarket.most_common_geography }}
+              </span>
+              <!-- company per stage -->
+            </div>
           </div>
         </div>
       </div>

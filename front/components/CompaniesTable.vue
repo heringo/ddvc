@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from "@iconify/vue";
 import type {
   ColumnDef,
   ColumnFiltersState,
@@ -83,7 +84,6 @@ const props = defineProps<{
 }>();
 
 const data = props.data as any;
-console.log(data);
 
 const columns: ColumnDef<Payment>[] = [
   {
@@ -92,18 +92,43 @@ const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) =>
       h("img", {
         src: row.getValue("logo_url"),
-        alt: row.getValue("name"),
         class: "h-8 w-8 border rounded-full",
       }),
   },
+
   {
-    accessorKey: "name",
+    accessorKey: "domain",
     header: "Name",
-    cell: ({ row }) => h("div", { class: "capitalize" }, row.getValue("name")),
+    cell: ({ row }) =>
+      h(
+        "a",
+        { href: `https://${row.getValue("domain")}`, target: "_blank" },
+        (row as any)?.original?.name
+      ),
   },
   {
     accessorKey: "topic_probability",
-    header: "Confidence",
+    header: ({ column }) => {
+      return h(
+        Button,
+        {
+          variant: "ghost",
+          onClick: () => column.toggleSorting(column.getIsSorted() === "asc"),
+        },
+        () => [
+          "Confidence",
+          h(Icon, {
+            class: "ml-2 h-4 w-4",
+            icon:
+              column.getIsSorted() === "asc"
+                ? "lucide:arrow-up"
+                : column.getIsSorted() === "desc"
+                ? "lucide:arrow-down"
+                : "lucide:text",
+          }),
+        ]
+      );
+    },
     cell: ({ row }) => {
       const probability: any = row.getValue("topic_probability");
 
@@ -130,7 +155,27 @@ const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "founded_at",
-    header: "Founding year",
+    header: ({ column }) => {
+      return h(
+        Button,
+        {
+          variant: "ghost",
+          onClick: () => column.toggleSorting(column.getIsSorted() === "asc"),
+        },
+        () => [
+          "Founding Year",
+          h(Icon, {
+            class: "ml-2 h-4 w-4",
+            icon:
+              column.getIsSorted() === "asc"
+                ? "lucide:arrow-up"
+                : column.getIsSorted() === "desc"
+                ? "lucide:arrow-down"
+                : "lucide:text",
+          }),
+        ]
+      );
+    },
     cell: ({ row }) => {
       const foundedAt: any = row.getValue("founded_at");
       const foundingYear = new Date(foundedAt).getFullYear();
@@ -140,13 +185,54 @@ const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: "headcount",
-    header: "Headcount",
+    header: ({ column }) => {
+      return h(
+        Button,
+        {
+          variant: "ghost",
+          onClick: () => column.toggleSorting(column.getIsSorted() === "asc"),
+        },
+        () => [
+          "Headcount",
+          h(Icon, {
+            class: "ml-2 h-4 w-4",
+            icon:
+              column.getIsSorted() === "asc"
+                ? "lucide:arrow-up"
+                : column.getIsSorted() === "desc"
+                ? "lucide:arrow-down"
+                : "lucide:text",
+          }),
+        ]
+      );
+    },
     cell: ({ row }) =>
       h("div", { class: "capitalize" }, row.getValue("headcount")),
   },
   {
     accessorKey: "funding_total",
-    header: "Total funding",
+    header: ({ column }) => {
+      return h(
+        Button,
+        {
+          variant: "ghost",
+          onClick: () => column.toggleSorting(column.getIsSorted() === "asc"),
+        },
+        () => [
+          "Total funding",
+          h(Icon, {
+            class: "ml-2 h-4 w-4",
+            icon:
+              column.getIsSorted() === "asc"
+                ? "lucide:arrow-up"
+                : column.getIsSorted() === "desc"
+                ? "lucide:arrow-down"
+                : "lucide:text",
+          }),
+        ]
+      );
+    },
+
     cell: ({ row }) => {
       const formattedAmount = formatAmount(row.getValue("funding_total"));
       return h("div", { class: "capitalize" }, `${formattedAmount}`);
@@ -214,7 +300,7 @@ const table = useVueTable({
 
 <template>
   <div class="w-full">
-    <div class="black-shadow" id="companies-table">
+    <div class="black-shadow pt-1" id="companies-table">
       <Table>
         <TableHeader>
           <TableRow
@@ -259,10 +345,6 @@ const table = useVueTable({
     </div>
 
     <div class="flex items-center justify-end space-x-2 py-4">
-      <div class="flex-1 text-sm text-muted-foreground">
-        {{ table.getFilteredSelectedRowModel().rows.length }} of
-        {{ table.getFilteredRowModel().rows.length }} row(s) selected.
-      </div>
       <div class="space-x-2">
         <Button
           variant="outline"
