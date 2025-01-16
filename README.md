@@ -10,6 +10,7 @@
 
 ```bash
 brew install rye
+brew install llvm
 ```
 
 ```bash
