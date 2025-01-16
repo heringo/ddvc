@@ -10,4 +10,7 @@ wheels/
 .venv
 .env
 
-test
+**/.DS_Store
+.DS_Store
+**/node_modules
+node_modules

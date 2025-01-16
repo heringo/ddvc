@@ -12,10 +12,15 @@
 -e file:.
 certifi==2024.12.14
     # via requests
+cffi==1.17.1
+    # via cryptography
+    # via pynacl
 charset-normalizer==3.4.1
     # via requests
-greenlet==3.1.1
-    # via sqlalchemy
+cryptography==44.0.0
+    # via pyjwt
+deprecated==1.2.15
+    # via pygithub
 idna==3.10
     # via requests
 numpy==2.2.1
@@ -24,6 +29,14 @@ pandas==2.2.3
     # via ddvc
 psycopg2-binary==2.9.10
     # via ddvc
+pycparser==2.22
+    # via cffi
+pygithub==2.5.0
+    # via ddvc
+pyjwt==2.10.1
+    # via pygithub
+pynacl==1.5.0
+    # via pygithub
 python-dateutil==2.9.0.post0
     # via pandas
 python-dotenv==1.0.1
@@ -32,13 +45,20 @@ pytz==2024.2
     # via pandas
 requests==2.32.3
     # via ddvc
+    # via pygithub
 six==1.17.0
     # via python-dateutil
 sqlalchemy==2.0.37
     # via ddvc
+tqdm==4.67.1
+    # via ddvc
 typing-extensions==4.12.2
+    # via pygithub
     # via sqlalchemy
 tzdata==2024.2
     # via pandas
 urllib3==2.3.0
+    # via pygithub
     # via requests
+wrapt==1.17.2
+    # via deprecated
