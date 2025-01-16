@@ -14,6 +14,8 @@ certifi==2024.12.14
     # via requests
 charset-normalizer==3.4.1
     # via requests
+greenlet==3.1.1
+    # via sqlalchemy
 idna==3.10
     # via requests
 numpy==2.2.1

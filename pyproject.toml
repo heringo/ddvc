@@ -3,7 +3,7 @@ name = "ddvc"
 version = "0.1.0"
 description = "Add your description here"
 authors = [
-    { name = "Maxime Dolores", email = "19026937+mdolr@users.noreply.github.com" }
+    { name = "Maxime Dolores", email = "19026937+mdolr@users.noreply.github.com" },
 ]
 dependencies = [
     "sqlalchemy>=2.0.37",
@@ -32,3 +32,4 @@ packages = ["src/ddvc"]
 [tool.rye.scripts]
 harmonic = "python -m src.collect.harmonic"
 predictleads = "python -m src.collect.predictleads"
+similarweb = "python -m src.collect.similarweb"
