@@ -79,6 +79,41 @@ const { data: newsData, error: newsError }: { data: any; error: any } =
       )
   );
 
+const {
+  data: timeseriesData,
+  error: timeseriesError,
+}: { data: any; error: any } = await useAsyncData(() =>
+  supabase
+    .from("harmonic_data")
+    .select("*")
+    .in(
+      "company_id",
+      companiesData?.value?.data?.map((company: any) => company.id)
+    )
+    .eq("type", "similarweb_visits")
+);
+
+console.log("timeseriesData", timeseriesData);
+
+let webTrafficPerMonth = timeseriesData.value.data.reduce(
+  (acc: any, item: any) => {
+    const date = item.date.split("T")[0]; // Extract date in 'yyyy-mm-dd' format
+    if (!acc[date]) {
+      acc[date] = 0; // Initialize the date entry if not exists
+    }
+    acc[date] += item.value; // Accumulate the values for the same date
+    return acc;
+  },
+  {}
+);
+
+webTrafficPerMonth = Object.entries(webTrafficPerMonth).map(
+  ([date, value]) => ({
+    date,
+    value,
+  })
+);
+
 const openPage = (url: string) => {
   window.open(url, "_blank");
 };
@@ -232,6 +267,30 @@ companiesFoundedPerYear = Object.entries(companiesFoundedPerYear)
           index="year"
           :data="companiesFoundedPerYear"
           :categories="['count']"
+          :show-grid-line="true"
+          :show-legend="false"
+          :y-formatter="
+            (tick, i) => {
+              return typeof tick === 'number'
+                ? `${new Intl.NumberFormat('us').format(tick).toString()}`
+                : '';
+            }
+          "
+          :show-x-axis="true"
+          :show-y-axis="true"
+          :curve-type="CurveType.Linear"
+        />
+      </div>
+
+      <h3 class="text-2xl font-bold mb-4 mt-4">Web traffic trends</h3>
+      <div class="p-4 black-shadow mt-4 h-96">
+        <h4 class="text-lg mb-8">Sum of traffic across companies</h4>
+
+        <AreaChart
+          :class="'h-64'"
+          index="date"
+          :data="webTrafficPerMonth"
+          :categories="['value']"
           :show-grid-line="true"
           :show-legend="false"
           :y-formatter="
