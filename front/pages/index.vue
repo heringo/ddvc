@@ -89,7 +89,9 @@ const getSubmarkets = async () => {
   });
 
   console.log(data);
-  submarkets.value = data;
+
+  // remove outliers topic
+  submarkets.value = data.filter((submarket: any) => submarket.id != 14);
   console.log(error);
 
   searched.value = true;
